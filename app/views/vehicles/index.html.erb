@@ -1,0 +1,24 @@
+<main class="page-shell">
+  <section class="page-heading">
+    <p class="eyebrow">Search fleet</p>
+    <h1>Choose by trip, budget, and comfort.</h1>
+    <p>Filter the live fleet by pickup hub, class, transmission, fuel type, seats, and daily rate. Every card is tuned for fast comparison.</p>
+  </section>
+
+  <%= form_with url: vehicles_path, method: :get, class: "filter-bar" do |form| %>
+    <%= form.select :location, options_for_select(@locations, @filters[:location]), { include_blank: "Any location" } %>
+    <%= form.select :category, options_for_select(@categories, @filters[:category]), { include_blank: "All classes" } %>
+    <%= form.select :transmission, options_for_select(@transmissions, @filters[:transmission]), { include_blank: "Transmission" } %>
+    <%= form.select :fuel, options_for_select(@fuels, @filters[:fuel]), { include_blank: "Fuel type" } %>
+    <%= form.number_field :seats, value: @filters[:seats], min: 2, placeholder: "Seats" %>
+    <%= form.number_field :max_rate, value: @filters[:max_rate], min: 1500, step: 250, placeholder: "Max Rs/day" %>
+    <%= form.submit "Apply", class: "primary-button compact" %>
+    <%= link_to "Reset", vehicles_path, class: "ghost-button" %>
+  <% end %>
+
+  <div class="results-line"><%= pluralize(@vehicles.count, "car") %> available</div>
+
+  <section class="vehicle-grid">
+    <%= render @vehicles %>
+  </section>
+</main>

@@ -1,0 +1,18 @@
+<section class="admin-heading">
+  <p class="eyebrow">Support</p>
+  <h1>Disputes and tickets</h1>
+</section>
+<table class="admin-table">
+  <thead><tr><th>Subject</th><th>Customer</th><th>Category</th><th>Priority</th><th>Status</th></tr></thead>
+  <tbody>
+    <% @support_tickets.each do |ticket| %>
+      <tr>
+        <td><strong><%= ticket.subject %></strong><br><span><%= ticket.message %></span></td>
+        <td><%= ticket.user.name %></td>
+        <td><%= ticket.category %></td>
+        <td><%= ticket.priority %></td>
+        <td><span class="status-pill"><%= ticket.status %></span></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

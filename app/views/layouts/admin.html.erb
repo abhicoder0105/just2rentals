@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin - J2C Rentals</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "admin" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  </head>
+  <body class="admin-body">
+    <aside class="admin-sidebar">
+      <%= link_to "J2C Admin", admin_root_path, class: "admin-brand" %>
+      <%= link_to "Dashboard", admin_root_path %>
+      <%= link_to "Car listings", admin_vehicles_path %>
+      <%= link_to "Requests", admin_reservations_path %>
+      <%= link_to "Payments", admin_payments_path %>
+      <%= link_to "Customers", admin_customers_path %>
+      <%= link_to "Maintenance", admin_maintenance_logs_path %>
+      <%= link_to "Support", admin_support_tickets_path %>
+      <%= link_to "Coupons", admin_coupons_path %>
+      <%= link_to "CMS", admin_content_blocks_path %>
+      <%= link_to "Leads", admin_leads_path %>
+      <% if current_user&.can?("team.manage") %>
+        <%= link_to "Team & RBAC", admin_team_index_path %>
+      <% end %>
+      <%= link_to "Sign out", admin_session_path, data: { turbo_method: :delete } %>
+      <%= link_to "View site", root_path %>
+    </aside>
+    <main class="admin-main">
+      <% if notice.present? %><p class="flash notice"><%= notice %></p><% end %>
+      <% if alert.present? %><p class="flash alert"><%= alert %></p><% end %>
+      <%= yield %>
+    </main>
+    <div class="loading-overlay" aria-hidden="true"><span class="loader-ring"></span></div>
+  </body>
+</html>

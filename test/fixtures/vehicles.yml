@@ -1,0 +1,45 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  make: MyString
+  model: MyString
+  year: 1
+  category: MyString
+  seats: 1
+  doors: 1
+  transmission: MyString
+  fuel: MyString
+  drivetrain: MyString
+  location: MyString
+  daily_rate: 9.99
+  rating: 9.99
+  image_url: MyString
+  hero_color: MyString
+  mileage: MyString
+  luggage: 1
+  featured: false
+  available: false
+  description: MyText
+
+two:
+  name: MyString
+  make: MyString
+  model: MyString
+  year: 1
+  category: MyString
+  seats: 1
+  doors: 1
+  transmission: MyString
+  fuel: MyString
+  drivetrain: MyString
+  location: MyString
+  daily_rate: 9.99
+  rating: 9.99
+  image_url: MyString
+  hero_color: MyString
+  mileage: MyString
+  luggage: 1
+  featured: false
+  available: false
+  description: MyText

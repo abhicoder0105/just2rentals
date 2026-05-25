@@ -1,0 +1,60 @@
+<section class="admin-heading">
+  <p class="eyebrow">Access control</p>
+  <h1>Team & permissions</h1>
+</section>
+
+<section class="admin-grid">
+  <article class="admin-panel">
+    <h2>Invite admin</h2>
+    <%= form_with model: [:admin, @invitation], url: invite_admin_team_index_path, class: "admin-form" do |form| %>
+      <label>Email <%= form.email_field :email, required: true, placeholder: "ops@example.com" %></label>
+      <label>Role <%= form.select :role, User::ROLES - ["customer"] %></label>
+      <%= form.submit "Generate invite", class: "primary-button" %>
+    <% end %>
+  </article>
+
+  <article class="admin-panel">
+    <h2>Pending invitations</h2>
+    <table class="admin-table">
+      <tbody>
+        <% @invitations.each do |invitation| %>
+          <tr>
+            <td><strong><%= invitation.email %></strong><br><span><%= invitation.role %></span></td>
+            <td><%= invitation.active? ? "Active" : "Expired/accepted" %></td>
+            <td><span><%= invitation.token %></span></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>
+
+<section class="admin-panel">
+  <h2>Permission matrix</h2>
+  <table class="admin-table">
+    <thead><tr><th>User</th><th>Role</th><th>Permissions</th><th></th></tr></thead>
+    <tbody>
+      <% @admins.each do |admin| %>
+        <tr>
+          <td><strong><%= admin.name %></strong><br><span><%= admin.email %></span></td>
+          <td><span class="status-pill"><%= admin.role %></span></td>
+          <td>
+            <%= form_with url: update_permissions_admin_team_index_path, method: :patch, class: "admin-form" do |form| %>
+              <%= hidden_field_tag :user_id, admin.id %>
+              <div class="check-row">
+                <% @permissions.each do |permission| %>
+                  <label>
+                    <%= check_box_tag "permission_ids[]", permission.id, admin.permission_ids.include?(permission.id) %>
+                    <%= permission.key %>
+                  </label>
+                <% end %>
+              </div>
+              <%= form.submit "Save", class: "secondary-button compact" %>
+            <% end %>
+          </td>
+          <td><%= admin.last_login_at || "Never" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

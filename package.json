@@ -1,0 +1,25 @@
+{
+  "name": "j2c-rentals",
+  "version": "1.0.0",
+  "description": "Production-minded car rental platform prototype with a customer storefront and isolated admin operations portal.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "esbuild": "^0.28.0"
+  },
+  "dependencies": {
+    "@hotwired/turbo-rails": "^8.0.23"
+  }
+}

@@ -1,0 +1,10 @@
+<main class="page-shell narrow">
+  <section class="lookup-panel">
+    <p class="eyebrow">Find booking</p>
+    <h1>Look up a reservation.</h1>
+    <%= form_with url: find_reservations_path, method: :post, class: "lookup-form" do |form| %>
+      <%= form.text_field :confirmation_code, placeholder: "J2CABC123" %>
+      <%= form.submit "Find", class: "primary-button" %>
+    <% end %>
+  </section>
+</main>

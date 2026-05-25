@@ -1,0 +1,18 @@
+<section class="admin-heading">
+  <p class="eyebrow">CRM</p>
+  <h1>Customers</h1>
+</section>
+<table class="admin-table">
+  <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Bookings</th><th>Joined</th></tr></thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><strong><%= customer.name %></strong></td>
+        <td><%= customer.email %></td>
+        <td><%= customer.phone %></td>
+        <td><%= customer.reservations.count %></td>
+        <td><%= customer.created_at.to_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

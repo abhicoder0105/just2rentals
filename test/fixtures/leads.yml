@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  phone: MyString
+  trip_location: MyString
+  preferred_vehicle: MyString
+  source: MyString
+  status: MyString
+  priority: MyString
+  follow_up_on: 2026-05-25
+  budget: 9.99
+  notes: MyText
+
+two:
+  name: MyString
+  email: MyString
+  phone: MyString
+  trip_location: MyString
+  preferred_vehicle: MyString
+  source: MyString
+  status: MyString
+  priority: MyString
+  follow_up_on: 2026-05-25
+  budget: 9.99
+  notes: MyText

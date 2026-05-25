@@ -1,0 +1,28 @@
+<section class="admin-heading">
+  <p class="eyebrow">Fleet health</p>
+  <h1>Maintenance tracking</h1>
+</section>
+<section class="admin-grid">
+  <article class="admin-panel">
+    <h2>Schedule service</h2>
+    <%= form_with model: [:admin, @maintenance_log], class: "admin-form" do |form| %>
+      <label>Vehicle <%= form.collection_select :vehicle_id, Vehicle.order(:name), :id, :name %></label>
+      <label>Status <%= form.select :status, MaintenanceLog::STATUSES %></label>
+      <label>Service type <%= form.text_field :service_type, placeholder: "Oil change, tires, detailing" %></label>
+      <label>Scheduled <%= form.date_field :scheduled_on %></label>
+      <label>Cost <%= form.number_field :cost, step: 100 %></label>
+      <label>Notes <%= form.text_area :notes, rows: 3 %></label>
+      <%= form.submit "Add service", class: "primary-button" %>
+    <% end %>
+  </article>
+  <article class="admin-panel">
+    <h2>Service calendar</h2>
+    <table class="admin-table">
+      <tbody>
+        <% @maintenance_logs.each do |log| %>
+          <tr><td><strong><%= log.vehicle.name %></strong><br><span><%= log.service_type %></span></td><td><%= log.scheduled_on %></td><td><%= log.status %></td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>

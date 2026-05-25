@@ -1,0 +1,29 @@
+<section class="admin-heading">
+  <p class="eyebrow">Pricing</p>
+  <h1>Coupons</h1>
+</section>
+<section class="admin-grid">
+  <article class="admin-panel">
+    <h2>Create coupon</h2>
+    <%= form_with model: [:admin, @coupon], class: "admin-form" do |form| %>
+      <label>Code <%= form.text_field :code, placeholder: "WEEKEND15" %></label>
+      <label>Type <%= form.select :discount_type, Coupon::DISCOUNT_TYPES %></label>
+      <label>Value <%= form.number_field :value, step: 1 %></label>
+      <label>Starts <%= form.date_field :starts_on %></label>
+      <label>Ends <%= form.date_field :ends_on %></label>
+      <label>Usage limit <%= form.number_field :usage_limit %></label>
+      <label>Description <%= form.text_area :description, rows: 3 %></label>
+      <%= form.submit "Create coupon", class: "primary-button" %>
+    <% end %>
+  </article>
+  <article class="admin-panel">
+    <h2>Active pricing controls</h2>
+    <table class="admin-table">
+      <tbody>
+        <% @coupons.each do |coupon| %>
+          <tr><td><strong><%= coupon.code %></strong><br><span><%= coupon.description %></span></td><td><%= coupon.discount_type %></td><td><%= coupon.value %></td><td><%= coupon.active? ? "Live" : "Off" %></td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>

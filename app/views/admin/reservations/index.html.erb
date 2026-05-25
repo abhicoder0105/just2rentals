@@ -1,0 +1,29 @@
+<section class="admin-heading row-heading">
+  <div>
+    <p class="eyebrow">Requests</p>
+    <h1>Reservations and approvals</h1>
+  </div>
+  <div class="admin-tabs">
+    <%= link_to "All", admin_reservations_path %>
+    <% Reservation::STATUSES.each do |status| %>
+      <%= link_to status, admin_reservations_path(status: status) %>
+    <% end %>
+  </div>
+</section>
+
+<table class="admin-table">
+  <thead><tr><th>Code</th><th>Customer</th><th>Car</th><th>Dates</th><th>Deposit</th><th>Docs</th><th>Status</th></tr></thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= link_to reservation.confirmation_code, admin_reservation_path(reservation), class: "text-link" %></td>
+        <td><%= reservation.renter_name %><br><span><%= reservation.phone %></span></td>
+        <td><%= reservation.vehicle.name %></td>
+        <td><%= reservation.pickup_date %> to <%= reservation.dropoff_date %></td>
+        <td><%= reservation.deposit_status %><br><span>Rs. <%= number_with_delimiter(reservation.deposit_amount.to_i) %></span></td>
+        <td><%= reservation.document_status %></td>
+        <td><span class="status-pill"><%= reservation.status %></span></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

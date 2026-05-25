@@ -1,0 +1,26 @@
+<main class="page-shell narrow">
+  <section class="lookup-panel">
+    <p class="eyebrow">Customer access</p>
+    <h1>Sign in</h1>
+    <%= form_with url: session_path, class: "lookup-form" do |form| %>
+      <%= form.email_field :email, placeholder: "customer@example.com", required: true %>
+      <%= form.text_field :name,
+      placeholder: "Full Name",
+      required: true %>
+
+      <%= form.telephone_field :phone,
+            placeholder: "+91 98765 43210",
+            required: true %>
+
+      <%= form.password_field :password,
+            placeholder: "Password",
+            required: true %>
+
+      <%= form.password_field :password_confirmation,
+            placeholder: "Confirm Password",
+            required: true %>
+            <%= form.password_field :password, placeholder: "Password", required: true %>
+      <%= form.submit "Sign in", class: "primary-button" %>
+    <% end %>
+  </section>
+</main>

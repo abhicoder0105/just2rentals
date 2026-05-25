@@ -1,0 +1,46 @@
+<%= form_with model: [vehicle, reservation], class: "booking-form" do |form| %>
+  <% if reservation.errors.any? %>
+    <div class="error-box">
+      <strong>Please fix <%= pluralize(reservation.errors.count, "issue") %></strong>
+      <ul>
+        <% reservation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-grid">
+    <label>First name <%= form.text_field :first_name, placeholder: "Aarav" %></label>
+    <label>Last name <%= form.text_field :last_name, placeholder: "Mehta" %></label>
+    <label>Email <%= form.email_field :email, placeholder: "name@example.com" %></label>
+    <label>Phone <%= form.telephone_field :phone, placeholder: "+91 98765 43210" %></label>
+    <label>Pickup location <%= form.select :pickup_location, options_for_select(Vehicle::LOCATIONS, reservation.pickup_location) %></label>
+    <label>Drop-off location <%= form.select :dropoff_location, options_for_select(Vehicle::LOCATIONS, reservation.dropoff_location) %></label>
+    <label>Pickup date <%= form.date_field :pickup_date %></label>
+    <label>Drop-off date <%= form.date_field :dropoff_date %></label>
+    <label>Pickup time <%= form.time_field :pickup_time %></label>
+    <label>Drop-off time <%= form.time_field :dropoff_time %></label>
+    <label>Driver age <%= form.number_field :driver_age, min: 21 %></label>
+    <label>Protection <%= form.select :protection_plan, options_for_select(Reservation::PROTECTION_PLANS.keys, reservation.protection_plan) %></label>
+  </div>
+
+  <fieldset class="extras-fieldset">
+    <legend>Extras</legend>
+    <% Reservation::EXTRA_OPTIONS.each do |extra, price| %>
+      <label>
+        <%= check_box_tag "reservation[extras][]", extra, Array(reservation.extras).include?(extra) %>
+        <span><%= extra %> <small>Rs. <%= price %></small></span>
+      </label>
+    <% end %>
+  </fieldset>
+
+  <label>Notes <%= form.text_area :notes, rows: 3, placeholder: "Flight number, delivery instructions, or special requests" %></label>
+
+  <div class="booking-summary">
+    <span>Starting at</span>
+    <strong>Rs. <%= number_with_delimiter(vehicle.daily_rate.to_i) %>/day</strong>
+  </div>
+
+  <%= form.submit "Confirm reservation", class: "primary-button full" %>
+<% end %>

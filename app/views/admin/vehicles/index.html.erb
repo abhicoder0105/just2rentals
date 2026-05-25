@@ -1,0 +1,23 @@
+<section class="admin-heading row-heading">
+  <div>
+    <p class="eyebrow">Fleet</p>
+    <h1>Manage car listings</h1>
+  </div>
+  <%= link_to "Add car", new_admin_vehicle_path, class: "primary-button" %>
+</section>
+
+<table class="admin-table">
+  <thead><tr><th>Car</th><th>Class</th><th>Location</th><th>Rate</th><th>Live</th><th></th></tr></thead>
+  <tbody>
+    <% @vehicles.each do |vehicle| %>
+      <tr>
+        <td><strong><%= vehicle.name %></strong><br><span><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></span></td>
+        <td><%= vehicle.category %></td>
+        <td><%= vehicle.location %></td>
+        <td>Rs. <%= number_with_delimiter(vehicle.daily_rate.to_i) %></td>
+        <td><%= vehicle.available? ? "Yes" : "No" %></td>
+        <td><%= link_to "Edit", edit_admin_vehicle_path(vehicle), class: "text-link" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

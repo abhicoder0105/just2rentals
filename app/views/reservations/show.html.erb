@@ -1,0 +1,46 @@
+<main class="page-shell narrow">
+  <section class="confirmation-panel">
+    <p class="eyebrow">Reservation confirmed</p>
+    <h1><%= @reservation.confirmation_code %></h1>
+    <p><%= @reservation.renter_name %>, your <%= @reservation.vehicle.name %> is reserved from <%= @reservation.pickup_date.to_fs(:long) %> to <%= @reservation.dropoff_date.to_fs(:long) %>.</p>
+    <div class="feature-list">
+      <span>Status: <%= @reservation.status %></span>
+      <span>Invoice: <%= @reservation.invoice_number %></span>
+      <span>Documents: <%= @reservation.document_status %></span>
+    </div>
+  </section>
+
+  <section class="receipt-grid">
+    <div>
+      <span>Pickup</span>
+      <strong><%= @reservation.pickup_location %></strong>
+      <p><%= @reservation.pickup_date.to_fs(:long) %> at <%= @reservation.pickup_time %></p>
+    </div>
+    <div>
+      <span>Return</span>
+      <strong><%= @reservation.dropoff_location %></strong>
+      <p><%= @reservation.dropoff_date.to_fs(:long) %> at <%= @reservation.dropoff_time %></p>
+    </div>
+    <div>
+      <span>Vehicle</span>
+      <strong><%= @reservation.vehicle.name %></strong>
+      <p><%= @reservation.vehicle.category %> - <%= @reservation.vehicle.transmission %></p>
+    </div>
+    <div>
+      <span>Total</span>
+      <strong>Rs. <%= number_with_delimiter(@reservation.total_price.to_i) %></strong>
+      <p><%= pluralize(@reservation.rental_days, "day") %> with <%= @reservation.protection_plan %> protection</p>
+    </div>
+  </section>
+
+  <% if Array(@reservation.extras).any? %>
+    <section class="section-wrap compact-section">
+      <p class="eyebrow">Extras</p>
+      <div class="feature-list">
+        <% @reservation.extras.each do |extra| %>
+          <span><%= extra %></span>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+</main>

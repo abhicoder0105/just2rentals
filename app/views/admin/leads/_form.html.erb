@@ -1,0 +1,19 @@
+<%= form_with model: [:admin, lead], class: "admin-form" do |form| %>
+  <% if lead.errors.any? %>
+    <div class="error-box"><%= lead.errors.full_messages.to_sentence %></div>
+  <% end %>
+  <div class="form-grid">
+    <label>Name <%= form.text_field :name %></label>
+    <label>Phone <%= form.telephone_field :phone %></label>
+    <label>Email <%= form.email_field :email %></label>
+    <label>Trip location <%= form.select :trip_location, Vehicle::LOCATIONS %></label>
+    <label>Preferred car <%= form.text_field :preferred_vehicle, placeholder: "SUV, electric, 7-seater" %></label>
+    <label>Source <%= form.select :source, Lead::SOURCES %></label>
+    <label>Status <%= form.select :status, Lead::STATUSES %></label>
+    <label>Priority <%= form.select :priority, Lead::PRIORITIES %></label>
+    <label>Follow up <%= form.date_field :follow_up_on %></label>
+    <label>Budget <%= form.number_field :budget, step: 500 %></label>
+  </div>
+  <label>Notes <%= form.text_area :notes, rows: 4 %></label>
+  <%= form.submit class: "primary-button" %>
+<% end %>

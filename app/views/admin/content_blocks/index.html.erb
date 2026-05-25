@@ -1,0 +1,27 @@
+<section class="admin-heading">
+  <p class="eyebrow">CMS</p>
+  <h1>Homepage content</h1>
+</section>
+<section class="admin-grid">
+  <article class="admin-panel">
+    <h2>Add content block</h2>
+    <%= form_with model: [:admin, @content_block], class: "admin-form" do |form| %>
+      <label>Key <%= form.text_field :key, placeholder: "hero-summer" %></label>
+      <label>Placement <%= form.text_field :placement, placeholder: "homepage" %></label>
+      <label>Title <%= form.text_field :title %></label>
+      <label>Image URL <%= form.url_field :image_url %></label>
+      <label>Body <%= form.text_area :body, rows: 4 %></label>
+      <%= form.submit "Save content", class: "primary-button" %>
+    <% end %>
+  </article>
+  <article class="admin-panel">
+    <h2>Content inventory</h2>
+    <table class="admin-table">
+      <tbody>
+        <% @content_blocks.each do |block| %>
+          <tr><td><strong><%= block.title %></strong><br><span><%= block.key %></span></td><td><%= block.placement %></td><td><%= block.active? ? "Live" : "Draft" %></td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>

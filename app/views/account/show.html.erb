@@ -1,0 +1,44 @@
+<main class="page-shell">
+  <section class="page-heading">
+    <p class="eyebrow">Customer account</p>
+    <h1><%= current_user.name %></h1>
+    <p class="muted"><%= current_user.email %> - <%= current_user.phone %></p>
+  </section>
+
+  <section class="stats-band">
+    <div><strong><%= @reservations.count %></strong><span>total bookings</span></div>
+    <div><strong><%= @reservations.where(status: "approved").count %></strong><span>approved</span></div>
+    <div><strong><%= @favorites.count %></strong><span>saved vehicles</span></div>
+    <div><strong>Rs. <%= number_with_delimiter(@reservations.sum(:total_price).to_i) %></strong><span>lifetime spend</span></div>
+  </section>
+
+  <section class="section-wrap compact-section">
+    <div class="section-title"><h2>Bookings</h2></div>
+    <table class="admin-table">
+      <thead><tr><th>Code</th><th>Car</th><th>Dates</th><th>Status</th><th>Total</th><th></th></tr></thead>
+      <tbody>
+        <% @reservations.each do |reservation| %>
+          <tr>
+            <td><%= reservation.confirmation_code %></td>
+            <td><%= reservation.vehicle.name %></td>
+            <td><%= reservation.pickup_date %> to <%= reservation.dropoff_date %></td>
+            <td><span class="status-pill"><%= reservation.status %></span></td>
+            <td>Rs. <%= number_with_delimiter(reservation.total_price.to_i) %></td>
+            <td>
+              <% if reservation.cancellable? %>
+                <%= button_to "Cancel", booking_cancellation_path(reservation), method: :patch, class: "ghost-button" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section-wrap compact-section">
+    <div class="section-title"><h2>Wishlist</h2></div>
+    <div class="vehicle-grid">
+      <%= render @favorites %>
+    </div>
+  </section>
+</main>

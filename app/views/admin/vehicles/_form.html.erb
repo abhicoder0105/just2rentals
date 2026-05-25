@@ -1,0 +1,30 @@
+<%= form_with model: [:admin, vehicle], class: "admin-form" do |form| %>
+  <% if vehicle.errors.any? %>
+    <div class="error-box"><%= vehicle.errors.full_messages.to_sentence %></div>
+  <% end %>
+  <div class="form-grid">
+    <label>Name <%= form.text_field :name %></label>
+    <label>Make <%= form.text_field :make %></label>
+    <label>Model <%= form.text_field :model %></label>
+    <label>Year <%= form.number_field :year %></label>
+    <label>Category <%= form.select :category, Vehicle::CATEGORIES %></label>
+    <label>Location <%= form.select :location, Vehicle::LOCATIONS %></label>
+    <label>Seats <%= form.number_field :seats, min: 2 %></label>
+    <label>Doors <%= form.number_field :doors, min: 2 %></label>
+    <label>Transmission <%= form.select :transmission, Vehicle::TRANSMISSIONS %></label>
+    <label>Fuel <%= form.select :fuel, Vehicle::FUELS %></label>
+    <label>Drivetrain <%= form.text_field :drivetrain %></label>
+    <label>Mileage <%= form.text_field :mileage %></label>
+    <label>Luggage <%= form.number_field :luggage, min: 1 %></label>
+    <label>Daily rate <%= form.number_field :daily_rate, step: 100 %></label>
+    <label>Rating <%= form.number_field :rating, step: 0.1, min: 1, max: 5 %></label>
+    <label>Accent color <%= form.color_field :hero_color %></label>
+  </div>
+  <label>Image URL <%= form.url_field :image_url %></label>
+  <label>Description <%= form.text_area :description, rows: 4 %></label>
+  <div class="check-row">
+    <label><%= form.check_box :featured %> Featured</label>
+    <label><%= form.check_box :available %> Available</label>
+  </div>
+  <%= form.submit class: "primary-button" %>
+<% end %>

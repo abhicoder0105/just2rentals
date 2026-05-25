@@ -1,0 +1,26 @@
+<article class="vehicle-card">
+  <div class="vehicle-image" style="background-image: linear-gradient(135deg, <%= vehicle.hero_color %>99, #11182755), url('<%= vehicle.image_url %>')">
+    <span><%= vehicle.badge_text %></span>
+  </div>
+  <div class="vehicle-card-body">
+    <div>
+      <p class="meta"><%= vehicle.year %> <%= vehicle.make %></p>
+      <h3><%= vehicle.name %></h3>
+    </div>
+    <p><%= truncate(vehicle.description, length: 105) %></p>
+    <div class="spec-row">
+      <span><%= vehicle.seats %> seats</span>
+      <span><%= vehicle.transmission %></span>
+      <span><%= vehicle.fuel %></span>
+    </div>
+    <div class="card-footer">
+      <strong>Rs. <%= number_with_delimiter(vehicle.daily_rate.to_i) %><small>/day</small></strong>
+      <div class="action-row">
+        <% if user_signed_in? && current_user.customer? %>
+          <%= button_to "Save", favorites_path(vehicle_id: vehicle.id), class: "ghost-button compact" %>
+        <% end %>
+        <%= link_to "Details", vehicle_path(vehicle), class: "secondary-button" %>
+      </div>
+    </div>
+  </div>
+</article>

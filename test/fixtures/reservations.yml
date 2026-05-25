@@ -1,0 +1,41 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vehicle: one
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  phone: MyString
+  pickup_location: MyString
+  dropoff_location: MyString
+  pickup_date: 2026-05-25
+  dropoff_date: 2026-05-25
+  pickup_time: MyString
+  dropoff_time: MyString
+  driver_age: 1
+  protection_plan: MyString
+  extras: MyText
+  status: MyString
+  confirmation_code: MyString
+  total_price: 9.99
+  notes: MyText
+
+two:
+  vehicle: two
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  phone: MyString
+  pickup_location: MyString
+  dropoff_location: MyString
+  pickup_date: 2026-05-25
+  dropoff_date: 2026-05-25
+  pickup_time: MyString
+  dropoff_time: MyString
+  driver_age: 1
+  protection_plan: MyString
+  extras: MyText
+  status: MyString
+  confirmation_code: MyString
+  total_price: 9.99
+  notes: MyText

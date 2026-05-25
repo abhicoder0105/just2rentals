@@ -1,0 +1,70 @@
+<section class="admin-heading">
+  <p class="eyebrow">Operations</p>
+  <h1>Rental admin dashboard</h1>
+</section>
+
+<section class="admin-metrics">
+  <div><span>Cars</span><strong data-count="<%= @vehicles_count %>"><%= @vehicles_count %></strong></div>
+  <div><span>Pending requests</span><strong data-count="<%= @pending_requests %>"><%= @pending_requests %></strong></div>
+  <div><span>Active rentals</span><strong data-count="<%= @active_rentals %>"><%= @active_rentals %></strong></div>
+  <div><span>Monthly revenue</span><strong>Rs. <%= number_with_delimiter(@monthly_revenue.to_i) %></strong></div>
+  <div><span>Utilization</span><strong><%= @utilization %>%</strong></div>
+  <div><span>Overdue returns</span><strong data-count="<%= @overdue_returns %>"><%= @overdue_returns %></strong></div>
+  <div><span>Maintenance alerts</span><strong data-count="<%= @maintenance_alerts %>"><%= @maintenance_alerts %></strong></div>
+  <div><span>Open leads</span><strong data-count="<%= @open_leads %>"><%= @open_leads %></strong></div>
+</section>
+
+<section class="admin-grid">
+  <article class="admin-panel">
+    <div class="section-title">
+      <h2>Revenue pulse</h2>
+      <span class="status-pill">Live demo</span>
+    </div>
+    <div class="chart-card" aria-label="Revenue chart">
+      <span class="chart-bar" style="height: 34%"></span>
+      <span class="chart-bar" style="height: 52%"></span>
+      <span class="chart-bar" style="height: 44%"></span>
+      <span class="chart-bar" style="height: 76%"></span>
+      <span class="chart-bar" style="height: 62%"></span>
+      <span class="chart-bar" style="height: 88%"></span>
+    </div>
+  </article>
+
+  <article class="admin-panel">
+    <div class="section-title">
+      <h2>Recent requests</h2>
+      <%= link_to "All requests", admin_reservations_path, class: "text-link" %>
+    </div>
+    <table class="admin-table">
+      <thead><tr><th>Code</th><th>Customer</th><th>Car</th><th>Status</th></tr></thead>
+      <tbody>
+        <% @recent_reservations.each do |reservation| %>
+          <tr>
+            <td><%= link_to reservation.confirmation_code, admin_reservation_path(reservation) %></td>
+            <td><%= reservation.renter_name %></td>
+            <td><%= reservation.vehicle.name %></td>
+            <td><span class="status-pill"><%= reservation.status %></span></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+
+  <article class="admin-panel">
+    <h2>Lead pipeline</h2>
+    <div class="pipeline-summary">
+      <% Lead::STATUSES.each do |status| %>
+        <div><span><%= status %></span><strong><%= @lead_pipeline.fetch(status, 0) %></strong></div>
+      <% end %>
+    </div>
+  </article>
+
+  <article class="admin-panel">
+    <h2>Recent activity</h2>
+    <div class="admin-facts">
+      <% @recent_activity.each do |activity| %>
+        <p><span><%= activity.user.name %></span><strong><%= activity.action %></strong></p>
+      <% end %>
+    </div>
+  </article>
+</section>

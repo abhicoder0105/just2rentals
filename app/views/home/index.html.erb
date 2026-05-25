@@ -1,0 +1,109 @@
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Self-drive rentals across premium city hubs</p>
+      <h1>Luxury rentals, tuned for effortless movement.</h1>
+      <p>Curated self-drive cars, transparent pricing, airport-ready handovers, and an operations team that keeps every booking calm.</p>
+      <div class="feature-list">
+        <span>Verified fleet</span>
+        <span>Deposit tracking</span>
+        <span>Document assisted pickup</span>
+      </div>
+    </div>
+
+    <%= form_with url: vehicles_path, method: :get, class: "search-panel" do |form| %>
+      <label>
+        Pickup location
+        <%= form.select :location, options_for_select(@locations), { include_blank: "Any location" } %>
+      </label>
+      <label>
+        Pickup date
+        <%= form.date_field :pickup_date, value: Date.current + 1.day %>
+      </label>
+      <label>
+        Return date
+        <%= form.date_field :dropoff_date, value: Date.current + 4.days %>
+      </label>
+      <label>
+        Vehicle class
+        <%= form.select :category, options_for_select(@categories), { include_blank: "All classes" } %>
+      </label>
+      <label>
+        Driver age
+        <%= form.number_field :driver_age, value: 28, min: 21 %>
+      </label>
+      <%= form.submit "Search cars", class: "primary-button" %>
+    <% end %>
+  </section>
+
+  <section class="stats-band">
+    <div><strong data-count="24">24</strong><span>hour airport pickup</span></div>
+    <div><strong data-count="18">18</strong><span>vehicle features tracked</span></div>
+    <div><strong>4.8</strong><span>average fleet rating</span></div>
+    <div><strong data-count="5">5</strong><span>city pickup hubs</span></div>
+  </section>
+
+  <section class="section-wrap">
+    <div class="section-title">
+      <div>
+        <p class="eyebrow">Featured fleet</p>
+        <h2>Popular picks for this week</h2>
+      </div>
+      <%= link_to "View all cars", vehicles_path, class: "text-link" %>
+    </div>
+    <div class="vehicle-grid">
+      <%= render @featured_vehicles %>
+    </div>
+  </section>
+
+  <section class="experience-band">
+    <div>
+      <p class="eyebrow">What the booking flow covers</p>
+      <h2>Everything renters expect before they commit.</h2>
+    </div>
+    <div class="feature-list">
+      <span>One-way or same-location returns</span>
+      <span>Protection plan selection</span>
+      <span>Extras such as child seats and additional drivers</span>
+      <span>Confirmation lookup</span>
+      <span>Transparent day-based pricing</span>
+      <span>Fuel, seats, class, and rate filters</span>
+    </div>
+  </section>
+
+  <section class="section-wrap">
+    <div class="section-title">
+      <div>
+        <p class="eyebrow">Trusted experience</p>
+        <h2>Designed for travelers who expect the details handled.</h2>
+      </div>
+    </div>
+    <div class="testimonials">
+      <article class="testimonial-card">
+        <p>"The airport handover was faster than a hotel check-in. Premium, simple, and very polished."</p>
+        <strong>Corporate renter</strong>
+      </article>
+      <article class="testimonial-card">
+        <p>"The car selection felt curated, not crowded. I knew exactly what I was booking."</p>
+        <strong>Weekend traveler</strong>
+      </article>
+      <article class="testimonial-card">
+        <p>"Documents, deposit, invoice, and pickup were all tracked clearly from one place."</p>
+        <strong>Family rental</strong>
+      </article>
+    </div>
+  </section>
+
+  <section class="premium-band">
+    <div>
+      <p class="eyebrow">Ready when you land</p>
+      <h2>Reserve a car that feels like part of the trip, not a chore before it.</h2>
+    </div>
+    <div class="feature-list">
+      <span>Airport fast pickup</span>
+      <span>Additional driver</span>
+      <span>Protection plans</span>
+      <span>Unlimited kilometer options</span>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,35 @@
+<main class="detail-page">
+  <section class="detail-hero">
+    <div class="detail-image" style="background-image: linear-gradient(135deg, <%= @vehicle.hero_color %>aa, #0f172a55), url('<%= @vehicle.image_url %>')"></div>
+    <div class="detail-copy">
+      <p class="eyebrow"><%= @vehicle.category %> in <%= @vehicle.location %></p>
+      <h1><%= @vehicle.name %></h1>
+      <p><%= @vehicle.description %></p>
+      <div class="detail-price">Rs. <%= number_with_delimiter(@vehicle.daily_rate.to_i) %><span>/day</span></div>
+      <div class="action-row">
+        <%= link_to "Reserve this car", new_vehicle_reservation_path(@vehicle), class: "primary-button" %>
+        <% if user_signed_in? && current_user.customer? %>
+          <%= button_to "Save to wishlist", favorites_path(vehicle_id: @vehicle.id), class: "ghost-button" %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <section class="spec-grid">
+    <div><strong><%= @vehicle.seats %></strong><span>Seats</span></div>
+    <div><strong><%= @vehicle.luggage %></strong><span>Bags</span></div>
+    <div><strong><%= @vehicle.transmission %></strong><span>Transmission</span></div>
+    <div><strong><%= @vehicle.fuel %></strong><span>Fuel</span></div>
+    <div><strong><%= @vehicle.drivetrain %></strong><span>Drivetrain</span></div>
+    <div><strong><%= @vehicle.rating %></strong><span>Rating</span></div>
+  </section>
+
+  <section class="section-wrap split">
+    <div>
+      <p class="eyebrow">Included</p>
+      <h2>Ready for city runs, airport transfers, and weekend plans.</h2>
+      <p class="muted">Every listing includes live availability, rate transparency, location filters, and an upgrade path for protection and extras.</p>
+    </div>
+    <%= render "reservations/form", vehicle: @vehicle, reservation: @reservation %>
+  </section>
+</main>

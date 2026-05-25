@@ -1,0 +1,337 @@
+.admin-body {
+  background:
+    radial-gradient(circle at top right, rgba(15, 118, 110, 0.14), transparent 28rem),
+    linear-gradient(180deg, #f8fafc, #eef2f7);
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  min-height: 100vh;
+}
+
+.admin-auth-body {
+  align-items: center;
+  background:
+    radial-gradient(circle at top left, rgba(200, 164, 93, 0.3), transparent 24rem),
+    linear-gradient(135deg, #050914, #101828 54%, #062421);
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.admin-login-panel {
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 26px;
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  gap: 18px;
+  max-width: 460px;
+  padding: 30px;
+  width: 100%;
+}
+
+.admin-sidebar {
+  background:
+    radial-gradient(circle at top, rgba(15, 118, 110, 0.24), transparent 18rem),
+    linear-gradient(180deg, #080c14, #111827);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.admin-sidebar a {
+  border-radius: 14px;
+  color: #d1d5db;
+  font-weight: 850;
+  padding: 11px 12px;
+  transition: background 180ms var(--ease), color 180ms var(--ease), transform 180ms var(--ease);
+}
+
+.admin-sidebar a:hover,
+.admin-brand {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: translateX(2px);
+}
+
+.admin-brand {
+  font-family: "Inter Tight", sans-serif;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+}
+
+.admin-main {
+  padding: clamp(20px, 4vw, 46px);
+}
+
+.admin-heading {
+  margin-bottom: 24px;
+}
+
+.admin-heading h1 {
+  font-family: "Inter Tight", sans-serif;
+  font-size: clamp(34px, 5vw, 62px);
+  letter-spacing: -0.025em;
+  line-height: 0.92;
+  margin: 0;
+}
+
+.row-heading {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: space-between;
+}
+
+.admin-metrics,
+.admin-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.admin-metrics {
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 18px;
+}
+
+.admin-metrics div,
+.admin-panel {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 22px;
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+}
+
+.admin-metrics div {
+  overflow: hidden;
+  position: relative;
+}
+
+.admin-metrics div::after {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  bottom: 0;
+  content: "";
+  height: 4px;
+  left: 0;
+  opacity: 0.7;
+  position: absolute;
+  width: 100%;
+}
+
+.admin-metrics span {
+  color: var(--muted);
+  display: block;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-metrics strong {
+  display: block;
+  font-family: "Inter Tight", sans-serif;
+  font-size: 34px;
+  letter-spacing: -0.02em;
+  margin-top: 8px;
+}
+
+.admin-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.9fr);
+}
+
+.admin-panel h2 {
+  font-family: "Inter Tight", sans-serif;
+  font-size: 25px;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.admin-table {
+  background: rgba(255, 255, 255, 0.82);
+  border-collapse: collapse;
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  width: 100%;
+}
+
+.admin-table th,
+.admin-table td {
+  border-bottom: 1px solid var(--line);
+  padding: 15px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.admin-table tbody tr {
+  transition: background 160ms var(--ease), transform 160ms var(--ease);
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(15, 118, 110, 0.045);
+}
+
+.admin-table th {
+  background: rgba(248, 250, 252, 0.9);
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.admin-table span,
+.admin-facts span,
+.lead-card span,
+.document-card span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.pipeline-summary,
+.admin-facts,
+.document-grid,
+.lead-board {
+  display: grid;
+  gap: 12px;
+}
+
+.pipeline-summary {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.pipeline-summary div,
+.document-card,
+.lead-card {
+  background: rgba(248, 250, 252, 0.88);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.pipeline-summary strong {
+  display: block;
+  font-family: "Inter Tight", sans-serif;
+  font-size: 28px;
+}
+
+.admin-form {
+  display: grid;
+  gap: 14px;
+}
+
+.check-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.check-row label {
+  align-items: center;
+  color: var(--ink);
+  display: flex;
+  gap: 8px;
+}
+
+.check-row input {
+  min-height: auto;
+  width: auto;
+}
+
+.admin-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-tabs a {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-weight: 900;
+  padding: 8px 12px;
+}
+
+.document-grid {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  margin-bottom: 18px;
+}
+
+.document-card,
+.inline-form {
+  display: grid;
+  gap: 10px;
+}
+
+.inline-form {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.lead-board {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.lead-column {
+  display: grid;
+  gap: 10px;
+}
+
+.lead-column h3 {
+  font-family: "Inter Tight", sans-serif;
+  margin: 0;
+}
+
+.lead-card {
+  display: grid;
+  gap: 6px;
+  transition: transform 180ms var(--ease), box-shadow 180ms var(--ease);
+}
+
+.lead-card:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.chart-card {
+  align-items: end;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(6, 1fr);
+  min-height: 190px;
+}
+
+.chart-bar {
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  border-radius: 999px 999px 8px 8px;
+  min-height: 18px;
+}
+
+@media (max-width: 1080px) {
+  .admin-body {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-sidebar {
+    height: auto;
+    position: static;
+  }
+
+  .admin-metrics,
+  .admin-grid,
+  .inline-form,
+  .lead-board {
+    grid-template-columns: 1fr;
+  }
+}

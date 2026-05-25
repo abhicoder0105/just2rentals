@@ -1,0 +1,29 @@
+<section class="admin-heading">
+  <p class="eyebrow">Sales pipeline</p>
+  <h1>Manage leads</h1>
+</section>
+
+<section class="admin-grid">
+  <article class="admin-panel">
+    <h2>Add lead</h2>
+    <%= render "form", lead: @lead %>
+  </article>
+  <article class="admin-panel">
+    <h2>Pipeline</h2>
+    <div class="lead-board">
+      <% Lead::STATUSES.each do |status| %>
+        <div class="lead-column">
+          <h3><%= status %></h3>
+          <% @leads.select { |lead| lead.status == status }.each do |lead| %>
+            <article class="lead-card">
+              <strong><%= lead.name %></strong>
+              <span><%= lead.trip_location %> - <%= lead.preferred_vehicle.presence || "Any car" %></span>
+              <span><%= lead.priority %> priority - follow up <%= lead.follow_up_on || "today" %></span>
+              <%= link_to "Edit", edit_admin_lead_path(lead), class: "text-link" %>
+            </article>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </article>
+</section>

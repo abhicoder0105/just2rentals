@@ -1,0 +1,11 @@
+<main class="admin-login-panel">
+  <p class="eyebrow">Restricted operations</p>
+  <h1>Admin portal</h1>
+  <% if alert.present? %><p class="flash alert"><%= alert %></p><% end %>
+  <% if notice.present? %><p class="flash notice"><%= notice %></p><% end %>
+  <%= form_with url: admin_session_path, class: "admin-form" do |form| %>
+    <label>Email <%= form.email_field :email, autocomplete: "email", required: true %></label>
+    <label>Password <%= form.password_field :password, autocomplete: "current-password", required: true %></label>
+    <%= form.submit "Enter admin portal", class: "primary-button full" %>
+  <% end %>
+</main>

@@ -1,0 +1,63 @@
+<section class="admin-heading row-heading">
+  <div>
+    <p class="eyebrow">Reservation <%= @reservation.confirmation_code %></p>
+    <h1><%= @reservation.renter_name %></h1>
+  </div>
+  <div class="action-row">
+    <%= button_to "Approve", approve_admin_reservation_path(@reservation), method: :patch, class: "primary-button" %>
+    <%= button_to "Deny", deny_admin_reservation_path(@reservation), method: :patch, class: "danger-button" %>
+  </div>
+</section>
+
+<section class="admin-grid">
+  <article class="admin-panel">
+    <h2>Request review</h2>
+    <%= form_with model: [:admin, @reservation], class: "admin-form" do |form| %>
+      <div class="form-grid">
+        <label>Status <%= form.select :status, Reservation::STATUSES %></label>
+        <label>Deposit amount <%= form.number_field :deposit_amount, step: 100 %></label>
+        <label>Deposit status <%= form.select :deposit_status, Reservation::DEPOSIT_STATUSES %></label>
+        <label>Documents <%= form.select :document_status, Reservation::DOCUMENT_STATUSES %></label>
+        <label>Reviewed by <%= form.text_field :reviewed_by, placeholder: current_user.name %></label>
+      </div>
+      <label>Admin notes <%= form.text_area :admin_notes, rows: 4 %></label>
+      <%= form.submit "Save review", class: "primary-button" %>
+    <% end %>
+  </article>
+
+  <article class="admin-panel">
+    <h2>Trip details</h2>
+    <div class="admin-facts">
+      <p><span>Car</span><strong><%= @reservation.vehicle.name %></strong></p>
+      <p><span>Pickup</span><strong><%= @reservation.pickup_location %> - <%= @reservation.pickup_date %></strong></p>
+      <p><span>Return</span><strong><%= @reservation.dropoff_location %> - <%= @reservation.dropoff_date %></strong></p>
+      <p><span>Total</span><strong>Rs. <%= number_with_delimiter(@reservation.total_price.to_i) %></strong></p>
+      <p><span>Contact</span><strong><%= @reservation.email %> / <%= @reservation.phone %></strong></p>
+    </div>
+  </article>
+</section>
+
+<section class="admin-panel">
+  <div class="section-title">
+    <h2>Documents</h2>
+  </div>
+  <div class="document-grid">
+    <% @reservation.rental_documents.each do |document| %>
+      <%= form_with model: [:admin, @reservation, document], class: "document-card" do |form| %>
+        <strong><%= document.document_type %></strong>
+        <span><%= document.file_name %></span>
+        <%= form.select :status, RentalDocument::STATUSES %>
+        <%= form.text_field :notes, placeholder: "Review notes" %>
+        <%= form.submit "Update", class: "secondary-button" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= form_with model: [:admin, @reservation, @document], class: "admin-form inline-form" do |form| %>
+    <%= form.select :document_type, RentalDocument::TYPES %>
+    <%= form.text_field :file_name, placeholder: "license-aarav.pdf" %>
+    <%= form.select :status, RentalDocument::STATUSES %>
+    <%= form.text_field :notes, placeholder: "Notes" %>
+    <%= form.submit "Add document", class: "primary-button compact" %>
+  <% end %>
+</section>

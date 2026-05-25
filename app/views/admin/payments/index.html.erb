@@ -1,0 +1,23 @@
+<section class="admin-heading">
+  <p class="eyebrow">Finance</p>
+  <h1>Payment overview</h1>
+</section>
+<section class="admin-metrics">
+  <div><span>Paid total</span><strong>Rs. <%= number_with_delimiter(@paid_total.to_i) %></strong></div>
+  <div><span>Payments</span><strong><%= @payments.count %></strong></div>
+</section>
+<table class="admin-table">
+  <thead><tr><th>Transaction</th><th>Customer</th><th>Booking</th><th>Amount</th><th>Status</th><th>Provider</th></tr></thead>
+  <tbody>
+    <% @payments.each do |payment| %>
+      <tr>
+        <td><%= payment.transaction_id %></td>
+        <td><%= payment.user&.name || payment.reservation.renter_name %></td>
+        <td><%= payment.reservation.confirmation_code %></td>
+        <td>Rs. <%= number_with_delimiter(payment.amount.to_i) %></td>
+        <td><span class="status-pill"><%= payment.status %></span></td>
+        <td><%= payment.provider %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
