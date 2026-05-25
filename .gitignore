@@ -1,0 +1,11 @@
+/node_modules
+/log
+/tmp
+/storage
+/vendor/bundle
+/.env
+/.DS_Store
+/app/assets/builds/*
+!/app/assets/builds/.keep
+/yarn-error.log
+npm-debug.log*
